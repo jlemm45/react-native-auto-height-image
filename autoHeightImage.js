@@ -5,7 +5,8 @@
 
 import React, { PureComponent } from 'react';
 import Image from 'react-native-android-image-polyfill';
-import { StyleSheet } from 'react-native';
+import { CachedImage } from 'react-native-cached-image';
+import { StyleSheet, ActivityIndicator } from 'react-native';
 import PropTypes from 'prop-types';
 
 import { getImageSizeFitWidth, getImageSizeFitWidthFromCache } from './cache';
@@ -81,7 +82,8 @@ export default class AutoHeightImage extends PureComponent {
         // remove `width` prop from `restProps`
         const { source, style, width, ...restProps } = this.props;
         return (
-            <Image
+            <CachedImage
+                loadingIndicator={() => <ActivityIndicator color="white" />}
                 source={source}
                 style={[this.styles.image, style]}
                 {...restProps}
